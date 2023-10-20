@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="index :: layout(~{:: title}, ~{:: #content})">
 <head>
-    <meta charset="UTF-8">
     <title>Sandbox</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
 </head>
-<body>
-Sandbox
+<body class="container">
+<nav th:replace="~{index :: nav}"></nav>
+
+<section id="content">
+    <h1>Sandbox</h1>
+</section>
 </body>
 </html>

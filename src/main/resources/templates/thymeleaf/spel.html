@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="index :: layout(~{:: title}, ~{:: #content})">
+<head>
+    <title>SpEL</title>
+</head>
+<body class="container">
+<section id="content">
+    <h1>SpEL</h1>
+
+    <h2>No-Operation</h2>
+
+    <p>
+        <span th:text="${null} ?: _">Thanks to <code>_</code> Thymeleaf will render this message.</span>
+    </p>
+
+    <h2>Numeric</h2>
+
+    <ul>
+        <li th:text="100 + 1"></li>
+        <li th:text="${100 + 1}"></li>
+    </ul>
+
+    <h2>JSON</h2>
+
+    <ul>
+        <li th:each="user : ${users}" th:text="${user.path('name')}"></li>
+    </ul>
+</section>
+</body>
+</html>

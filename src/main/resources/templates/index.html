@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(title, content)">
+<head th:fragment="common-head(title)">
     <meta charset="UTF-8">
-    <title>Femo</title>
-</head>
-<body>
-<h1>Femo</h1>
+    <title th:replace="${title} ?: _">Femo</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/webjars/htmx.org/1.9.6/dist/htmx.js">
+    <link rel="stylesheet" href="/webjars/hyperscript.org/0.9.11/dist/_hyperscript.js">
+    <link rel="stylesheet" href="/webjars/hyperscript.org/0.9.11/dist/hdb.js">
 
-<ul>
-    <li><a href="/sandbox">sandbox</a>
-        <ul>
-            <li><a href="/sandbox/spel">SpEL</a></li>
-        </ul>
-    </li>
-    <li><a href="/components">components</a>
-    </li>
-</ul>
+    <style>
+        nav + section {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="container">
+
+<nav class="navbar navbar-dark bg-dark" th:fragment="nav">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Femo</a>
+    </div>
+</nav>
+
+<section class="pt-2">
+    <ul>
+        <li><a href="/sandbox">Sandbox</a>
+        </li>
+        <li>Thymeleaf
+            <ul>
+                <li><a href="/thymeleaf/spel">SpEL</a></li>
+            </ul>
+        </li>
+        <li><a href="/components">Components</a>
+        </li>
+    </ul>
+</section>
+
+<section th:replace="${content} ?: _"></section>
+
 </body>
 </html>

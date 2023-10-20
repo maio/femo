@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="index :: layout(~{:: title}, ~{:: #content})">
 <head>
-    <meta charset="UTF-8">
     <title>Components</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
 </head>
-<body>
-<th:block th:if="false">
+<body class="container">
+<th:block th:remove="all">
+    <!-- Components-->
     <button th:fragment="my-button"
             th:with="icon=(${icon} ?: ~{})"
             class="btn btn-primary">
         My Button
 
-        <span th:insert="${icon}"></span>
+        <span class="badge bg-dark">
+            <span th:replace="${icon}"></span>
+        </span>
     </button>
 </th:block>
 
-<section class="container">
-    <button th:replace="~{:: my-button(icon=~{:: my-icon-1})}">
-        Xyz
-        <span th:fragment="my-icon-1">Icon-1</span>
+<section id="content">
+    <button th:replace="~{:: my-button(icon=~{:: icon-X})}">
+        <span th:fragment="icon-X">X</span>
     </button>
 </section>
 </body>
