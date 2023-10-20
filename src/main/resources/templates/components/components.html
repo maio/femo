@@ -18,20 +18,20 @@
         </span>
     </button>
 
-    <div class="card" layout:fragment="users-table(users)">
+    <div class="card" layout:fragment="users-table(users)" th:with="showEmail=(${showEmail} ?: true)">
         <div class="card-body px-0 py-1">
-            <table class="table mb-0">
+            <table class="table table-borderless table-hover mb-0">
                 <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Email</td>
-                    <td>Actions</td>
+                <tr class="border-bottom">
+                    <td>Username</td>
+                    <td th:if="${showEmail}">Email</td>
+                    <td class="text-end">Actions</td>
                 </tr>
                 </thead>
                 <tr th:each="user : ${users}" th:classappend="${userStat.last} ? 'last'">
-                    <td th:text="${user.name}"></td>
-                    <td th:text="${user.name}"></td>
-                    <td>
+                    <td th:text="${user.username}"></td>
+                    <td th:if="${showEmail}" th:text="${user.email}"></td>
+                    <td class="text-end">
                         <th:block layout:fragment="actions" th:object="${user}">...</th:block>
                     </td>
                 </tr>
@@ -48,24 +48,26 @@
     </button>
 
     <div th:each="user: ${users}" class="my-1 d-inline-block">
-        <button layout:replace="~{:: my-button(${user.name})}">
+        <button layout:replace="~{:: my-button(${user.username})}">
             <span layout:fragment="icon">&blacktriangleright;</span>
         </button>
     </div>
 
     <hr>
 
-    <table layout:replace="~{:: users-table(${users})}">
+    <table layout:replace="~{:: users-table(${users})}"
+           th:with="user=${users}[-1]">
         <th:block layout:fragment="actions">
             <button class="btn btn-sm btn-outline-danger"
-                    th:_="|on click confirm('Really delete *{name}?')|">Delete
+                    th:_="|on click confirm('Really delete ${user.name}?')|">Delete <span
+                    th:text="${user.username}"></span>
             </button>
         </th:block>
     </table>
 
     <hr>
 
-    <table layout:replace="~{:: users-table(${users})}">
+    <table layout:replace="~{:: users-table(users=${users}, showEmail=false)}">
         <th:block layout:fragment="actions">
             <button class="btn btn-sm btn-outline-warning"
                     th:_="|on click confirm('Really suspend *{name}?')|">Suspend
