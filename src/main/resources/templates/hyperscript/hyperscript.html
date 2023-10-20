@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="index :: layout(~{:: title}, ~{:: #content})">
+<head>
+    <title>Hyperscript</title>
+</head>
+<body class="container">
+<nav th:replace="~{index :: nav}"></nav>
+
+<section id="content">
+    <h1>Hyperscript</h1>
+
+    <p>
+        See <a href="https://hyperscript.org/" target="_blank">homepage</a> for documentation and examples.
+    </p>
+
+    <p>
+        <span _="
+            init
+                set x to 1
+                repeat forever
+                    wait 1s
+                    increment x then put result into me
+                end">1</span>
+    </p>
+</section>
+</body>
+</html>
