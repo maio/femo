@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       th:replace="index :: layout(~{:: title}, ~{:: #content})">
 <head>
     <title>Components</title>
 </head>
 <body class="container">
+
 <th:block th:remove="all">
     <!-- Components-->
-    <button th:fragment="my-button"
-            th:with="icon=(${icon} ?: ~{})"
-            class="btn btn-primary">
-        My Button
+    <button class="btn btn-primary" layout:fragment="my-button(text)">
+        [[${text}]]
 
         <span class="badge bg-dark">
-            <span th:replace="${icon}"></span>
+            <span layout:fragment="icon">?</span>
         </span>
     </button>
 </th:block>
 
 <section id="content">
-    <button th:replace="~{:: my-button(icon=~{:: icon-X})}">
-        <span th:fragment="icon-X">X</span>
+    <button layout:replace="~{:: my-button('Simple')}"></button>
+
+    <button layout:replace="~{:: my-button('Proceed')}">
+        <span layout:fragment="icon">&check;</span>
     </button>
+
+    <ul class="list-unstyled">
+        <li th:each="user: ${users}" class="my-1">
+            <button layout:replace="~{:: my-button(${user.get('name').asText()})}">
+                <span layout:fragment="icon">&blacktriangleright;</span>
+            </button>
+        </li>
+    </ul>
 </section>
 </body>
 </html>
