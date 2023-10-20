@@ -9,7 +9,7 @@
 <body class="container">
 
 <th:block th:remove="all">
-    <!-- Components-->
+    <!-- Components -->
     <button class="btn btn-primary" layout:fragment="my-button(text)">
         [[${text}]]
 
@@ -17,6 +17,27 @@
             <span layout:fragment="icon">?</span>
         </span>
     </button>
+
+    <div class="card" layout:fragment="users-table(users)">
+        <div class="card-body px-0 py-1">
+            <table class="table mb-0">
+                <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Actions</td>
+                </tr>
+                </thead>
+                <tr th:each="user : ${users}" th:classappend="${userStat.last} ? 'last'">
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td>
+                        <th:block layout:fragment="actions" th:object="${user}">...</th:block>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </th:block>
 
 <section id="content">
@@ -26,13 +47,31 @@
         <span layout:fragment="icon">&check;</span>
     </button>
 
-    <ul class="list-unstyled">
-        <li th:each="user: ${users}" class="my-1">
-            <button layout:replace="~{:: my-button(${user.get('name').asText()})}">
-                <span layout:fragment="icon">&blacktriangleright;</span>
+    <div th:each="user: ${users}" class="my-1 d-inline-block">
+        <button layout:replace="~{:: my-button(${user.name})}">
+            <span layout:fragment="icon">&blacktriangleright;</span>
+        </button>
+    </div>
+
+    <hr>
+
+    <table layout:replace="~{:: users-table(${users})}">
+        <th:block layout:fragment="actions">
+            <button class="btn btn-sm btn-outline-danger"
+                    th:_="|on click confirm('Really delete *{name}?')|">Delete
             </button>
-        </li>
-    </ul>
+        </th:block>
+    </table>
+
+    <hr>
+
+    <table layout:replace="~{:: users-table(${users})}">
+        <th:block layout:fragment="actions">
+            <button class="btn btn-sm btn-outline-warning"
+                    th:_="|on click confirm('Really suspend *{name}?')|">Suspend
+            </button>
+        </th:block>
+    </table>
 </section>
 </body>
 </html>
