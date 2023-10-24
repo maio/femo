@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="index :: layout(~{:: title}, ~{:: #content})">
+<head>
+    <title>HTMX</title>
+</head>
+<body class="container">
+<nav th:replace="~{index :: nav}"></nav>
+
+<section id="content">
+    <h1>HTMX</h1>
+
+    <p>Is empty...</p>
+</section>
+</body>
+</html>
