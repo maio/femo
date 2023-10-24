@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{index :: layout(~{:: title}, ~{:: #content})}">
+<head>
+    <title>HTMX - View Transitions</title>
+</head>
+<body class="container">
+<nav th:replace="~{index :: nav}"></nav>
+
+<section id="content">
+    <h1>View Transitions</h1>
+
+    <p>See <a href="https://htmx.org/essays/view-transitions/#a-practical-example">example</a> on htmx.org site.</p>
+
+    <p>You may also like <a href="https://www.youtube.com/watch?v=5K5wNqCUrL8">this cool demo on YouTube</a> of what's
+        possible with View Transitions.</p>
+
+    <div class="card" style="width: 500px"
+         th:fragment="table"
+         hx-get="/htmx/view-transitions::table"
+         hx-trigger="every 1s"
+         hx-swap="outerHTML transition:false">
+        <div class="card-header">Items</div>
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead>
+                <tr class="table-primary">
+                    <th class="ps-3">ID</th>
+                    <th>Name</th>
+                    <th class="pe-3">Actions</th>
+                </thead>
+                <tr th:each="item : ${items}" th:hx-vars="|itemId:${item.id}|">
+                    <td class="ps-3">#[[${item.id}]]</td>
+                    <td th:text="${item.name}"></td>
+                    <td class="pe-3">
+                        <a href="#">Delete</a>
+                        <a href="#"
+                           hx-get="/htmx/view-transitions::item-detail"
+                           hx-trigger="click"
+                           hx-target="closest .card"
+                           hx-swap="outerHTML transition:true"
+                        >Detail</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary"
+                    hx-post="/htmx/view-transitions::table/add-many"
+                    hx-swap="none">Add Many
+            </button>
+            <button class="btn btn-primary"
+                    hx-post="/htmx/view-transitions::table/add-one"
+                    hx-swap="none">Add One
+            </button>
+        </div>
+    </div>
+
+    <th:block th:remove="all">
+        <!--/*@thymesVar id="item" type="cz.maio.femo.HtmxController.Item"*/-->
+        <div class="card" style="width: 500px" th:fragment="item-detail">
+            <img class="card-img-top"
+                 th:src="|https://picsum.photos/500/300?grayscale&random=${item.id}|"
+                 width="500" height="300"
+                 alt="Item Image">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${item.name}">Item 123</h5>
+                <div class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary"
+                        hx-get="/htmx/view-transitions::table"
+                        hx-trigger="click"
+                        hx-target="closest .card"
+                        hx-swap="outerHTML transition:true">Go back
+                </button>
+            </div>
+        </div>
+    </th:block>
+</section>
+</body>
+</html>
