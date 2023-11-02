@@ -28,7 +28,7 @@ dependencies {
 
     implementation("org.webjars:bootstrap:5.3.2")
     implementation("org.webjars.npm:htmx.org:1.9.6")
-    implementation("org.webjars.npm:hyperscript.org:0.9.11")
+    implementation("org.webjars.npm:hyperscript.org:0.9.12")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
