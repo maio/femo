@@ -27,7 +27,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.webjars:bootstrap:5.3.2")
-    implementation("org.webjars.npm:htmx.org:1.9.6")
+    implementation("org.webjars.npm:htmx.org:1.9.7")
     implementation("org.webjars.npm:hyperscript.org:0.9.11")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
