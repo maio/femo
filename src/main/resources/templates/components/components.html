@@ -59,7 +59,7 @@
            th:with="user=${users}[-1]">
         <th:block layout:fragment="actions">
             <button class="btn btn-sm btn-outline-danger"
-                    th:_="|on click confirm('Really delete ${user.name}?')|">Delete <span
+                    th:_="|on click confirm('Really delete ${user.username}?')|">Delete <span
                     th:text="${user.username}"></span>
             </button>
         </th:block>
@@ -70,7 +70,7 @@
     <table layout:replace="~{:: users-table(users=${users}, showEmail=false)}">
         <th:block layout:fragment="actions">
             <button class="btn btn-sm btn-outline-warning"
-                    th:_="|on click confirm('Really suspend *{name}?')|">Suspend
+                    th:_="|on click confirm('Really suspend *{username}?')|">Suspend
             </button>
         </th:block>
     </table>
