@@ -17,10 +17,7 @@
         possible with View Transitions.</p>
 
     <div class="card" style="width: 500px"
-         th:fragment="table"
-         hx-get="/htmx/view-transitions::table"
-         hx-trigger="every 1s"
-         hx-swap="outerHTML transition:false">
+         th:fragment="table">
         <div class="card-header">Items</div>
         <div class="card-body p-0">
             <table class="table mb-0">
@@ -34,7 +31,11 @@
                     <td class="ps-3">#[[${item.id}]]</td>
                     <td th:text="${item.name}"></td>
                     <td class="pe-3">
-                        <a href="#">Delete</a>
+                        <a href="#"
+                           th:hx-delete="|/htmx/view-transitions/${item.id}|"
+                           hx-target="closest .card"
+                           hx-swap="outerHTML transition:true"
+                        >Delete</a>
                         <a href="#"
                            hx-get="/htmx/view-transitions::item-detail"
                            hx-trigger="click"
@@ -47,12 +48,9 @@
         </div>
         <div class="card-footer">
             <button class="btn btn-primary"
-                    hx-post="/htmx/view-transitions::table/add-many"
-                    hx-swap="none">Add Many
-            </button>
-            <button class="btn btn-primary"
-                    hx-post="/htmx/view-transitions::table/add-one"
-                    hx-swap="none">Add One
+                    hx-post="/htmx/view-transitions/reset"
+                    hx-target="closest .card"
+                    hx-swap="outerHTML transition:true">Reset
             </button>
         </div>
     </div>
