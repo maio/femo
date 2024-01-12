@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView
 import java.util.concurrent.atomic.AtomicReference
 
 @Controller
-class HtmxController {
+class HtmxViewTransitionsController {
 
     private data class State(
         val items: List<Item>
