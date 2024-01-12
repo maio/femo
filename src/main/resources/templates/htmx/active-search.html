@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{index :: layout(~{:: title}, ~{:: #content})}">
+<head>
+    <title>HTMX - Active Search</title>
+</head>
+<body class="container">
+<nav th:replace="~{index :: nav}"></nav>
+
+<section id="content">
+    <h1>Active Search</h1>
+
+    <section class="mb-4">
+        <form id="searchForm"
+              action="/htmx/active-search"
+              class="row row-cols-lg-auto g-3 align-items-center"
+              hx-boost="true">
+            <div class="col-12">
+                <label class="visually-hidden" for="query">Query</label>
+                <input id="query"
+                       type="search"
+                       name="q"
+                       th:value="${query}"
+                       class="form-control"
+                       placeholder="Query..."
+                       hx-get="/htmx/active-search::table"
+                       hx-trigger="input changed delay:500ms"
+                       hx-target="#contacts"
+                       hx-swap="outerHTML transition:true"
+                       hx-indicator="#indicator"
+                       hx-disabled-elt="next button[type=submit]"
+                       autofocus>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+            <span class="ml-4 htmx-indicator" id="indicator">Loading...</span>
+            <span class="badge bg-danger"
+                  _="on htmx:responseError from #searchForm show me then wait 2s then hide me"
+                  style="display: none">Request failed</span>
+        </form>
+    </section>
+
+    <section>
+        <table class="table" id="contacts" th:fragment="table">
+            <tr th:each="item: ${contacts}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.email}"></td>
+            </tr>
+        </table>
+    </section>
+</section>
+</body>
+</html>
