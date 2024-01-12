@@ -25,6 +25,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.github.wimdeblauwe:htmx-spring-boot:3.2.0")
 
     implementation("org.webjars:bootstrap:5.3.2")
     implementation("org.webjars.npm:htmx.org:1.9.10")
