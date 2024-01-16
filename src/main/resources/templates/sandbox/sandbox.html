@@ -12,6 +12,29 @@
     <h1>Sandbox</h1>
 
     <p>Is empty...</p>
+
+    <form action="#"
+          hx-get="/sandbox/my-svg"
+          hx-target="#my-svg"
+          hx-trigger="input throttle:16ms"
+          hx-swap="outerHTML swap:0 settle:0">
+        <svg height="210" width="500"
+             id="my-svg"
+             th:fragment="my-svg">
+            <line th:each="delta: ${spec.deltas}" x1="0" th:y1="${delta}" th:x2="${delta}" y2="200"
+                  th:style="|stroke:rgb(${red ?: 0},0,0);stroke-width:2|"></line>
+
+            <line th:each="delta: ${spec.deltas}" th:x1="200 - ${delta}" y1="200" x2="0" th:y2="200 - ${delta}"
+                  th:style="|stroke:rgb(${red ?: 0},0,0);stroke-width:2|"></line>
+        </svg>
+
+        <div>
+            Red: <input type="range" min="0" max="255" th:value="${red}" class="slider" name="red">
+        </div>
+        <div>
+            Count: <input type="range" min="0" max="20" th:value="${count}" class="slider" name="count">
+        </div>
+    </form>
 </section>
 </body>
 </html>
