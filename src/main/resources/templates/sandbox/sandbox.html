@@ -35,6 +35,26 @@
             Count: <input type="range" min="0" max="20" th:value="${count}" class="slider" name="count">
         </div>
     </form>
+
+    <style>
+        #rainbow div {
+            position: absolute;
+            height: 200px;
+            border-radius: 0.5em 1em;
+        }
+    </style>
+
+    <div th:if="${rainbow}" th:fragment="rainbow"
+         id="rainbow"
+         hx-get="/sandbox/rainbow"
+         hx-trigger="every 16ms[document.hasFocus()]"
+         hx-swap="outerHTML swap:0 settle:0"
+         style="position: relative"
+    >
+        <div th:each="bar : ${rainbow.bars}"
+             th:style="|width: ${bar.width}px; left: ${bar.x}px; transform: scale(0.8,.5) translateY(${bar.translateY}px) rotate(${bar.rotation}deg); background-color: ${bar.color}|">
+        </div>
+    </div>
 </section>
 </body>
 </html>
