@@ -49,12 +49,16 @@
          hx-get="/sandbox/rainbow"
          hx-trigger="every 16ms[document.hasFocus()]"
          hx-swap="outerHTML swap:0 settle:0"
+         hx-include="#rainbowForm"
          style="position: relative"
     >
         <div th:each="bar : ${rainbow.bars}"
              th:style="|width: ${bar.width}px; left: ${bar.x}px; transform: scale(0.8,.5) translateY(${bar.translateY}px) rotate(${bar.rotation}deg); background-color: ${bar.color}|">
         </div>
     </div>
+    <form action="#" id="rainbowForm">
+        Count: <input type="range" min="5" max="500" value="5" class="slider" name="count">
+    </form>
 </section>
 </body>
 </html>

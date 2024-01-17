@@ -50,7 +50,7 @@ class SandboxController {
 
     data class Rainbow(
         val iter: Int = aIter.getAndIncrement(),
-        val barCount: Int = 85,
+        val barCount: Int = 5,
     ) {
         companion object {
             val aIter = AtomicInteger(0)
@@ -80,10 +80,10 @@ class SandboxController {
 
     @GetMapping("/sandbox/rainbow")
     fun rainbow(
-        @RequestParam(defaultValue = "false") play: Boolean,
+        @RequestParam(defaultValue = "5") count: Int,
     ): ModelAndView {
         return ModelAndView("sandbox/sandbox :: rainbow").apply {
-            addObject("rainbow", Rainbow())
+            addObject("rainbow", Rainbow(barCount = count))
         }
     }
 }
