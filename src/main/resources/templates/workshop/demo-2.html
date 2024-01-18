@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css">
+    <script src="/webjars/htmx.org/1.9.10/dist/htmx.js"></script>
+    <title>Demo 2</title>
+</head>
+<body>
+
+<div th:replace="~{workshop/fragments :: rendered-at}"></div>
+
+<div class="m-3">
+
+    <table class="table table-bordered mb-5">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:fragment="rows">
+            <tr th:each="person: ${people}">
+                <th scope="row" th:text="${person.id}">1</th>
+                <td th:text="${person.first}">Mark</td>
+                <td th:text="${person.last}">Otto</td>
+                <td th:text="${person.handle}">@mdo</td>
+            </tr>
+            <tr hx-trigger="revealed"
+                hx-swap="outerHTML"
+                th:hx-get="|/workshop/demo-2?page=${page + 1}|">
+                <td colspan="4" class="text-center">
+                    <div class="htmx-indicator spinner-border text-secondary"></div>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

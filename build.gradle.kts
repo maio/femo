@@ -26,6 +26,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.github.wimdeblauwe:htmx-spring-boot:3.2.0")
+    implementation("net.datafaker:datafaker:2.0.2")
 
     implementation("org.webjars:bootstrap:5.3.2")
     implementation("org.webjars.npm:htmx.org:1.9.10")

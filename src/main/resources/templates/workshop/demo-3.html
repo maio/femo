@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css">
+    <script src="/webjars/htmx.org/1.9.10/dist/htmx.js"></script>
+    <title>Demo 3</title>
+    <style>
+        #rainbow div {
+            position: absolute;
+            height: 200px;
+            border-radius: 0.5em 1em;
+        }
+
+        .settings {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .settings:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="vh-100">
+<div th:replace="~{workshop/fragments :: rendered-at}"></div>
+
+<div class="d-flex align-items-center justify-content-center user-select-none h-100 flex-column">
+    <div th:if="${rainbow}" th:fragment="rainbow"
+         id="rainbow"
+         hx-get="/workshop/demo-3/rainbow"
+         hx-trigger="every 16ms[document.hasFocus()]"
+         hx-swap="outerHTML swap:0 settle:0"
+         hx-include="#rainbowForm"
+         class="w-50">
+        <div class="position-relative mb-3">
+            <div th:each="bar : ${rainbow.bars}"
+                 th:style="|width: ${#numbers.formatDecimal(bar.width, 1, 2, 'POINT')}%; left: ${#numbers.formatDecimal(bar.x, 1, 2, 'POINT')}%; transform: scale(.7,.5) translateY(${bar.translateY}px) rotate(${bar.rotation}deg); background-color: ${bar.color}|">
+            </div>
+        </div>
+        <p style="text-align: center">
+            The above animation is [[${rainbow.bars.size}]] <code>&lt;div&gt;</code> tags, no CSS
+            transitions or animations.
+        </p>
+    </div>
+    <div class="pt-4 pb-5 w-100 settings">
+        <form action="#" id="rainbowForm" style="text-align: center">
+            <input style="width: 200px; transform: scale(200%)" type="range" min="10" max="200" value="10"
+                   class="slider" name="count">
+        </form>
+    </div>
+</div>
+</body>
+</html>

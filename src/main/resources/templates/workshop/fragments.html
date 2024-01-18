@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="text-center sticky-top" th:fragment="rendered-at">
+    <div class="d-inline-block bg-warning-subtle p-2 border border-1 rounded-bottom-3 border-dark-subtle border-top-0">
+        Rendered at <strong>[[${#dates.format(#dates.createNow(), 'HH:mm:ss.SSS')}]]</strong>
+    </div>
+</div>
+
+</body>
+</html>
