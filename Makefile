@@ -1,5 +1,5 @@
 pull:
 	git pull
 
-release: pull
+build-image:
 	./gradlew bootBuildImage
