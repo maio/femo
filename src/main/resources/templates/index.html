@@ -5,8 +5,8 @@
 <head th:fragment="common-head(title)">
     <meta charset="UTF-8">
     <title th:replace="${title} ?: _">Femo</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css">
-    <script src="/webjars/htmx.org/1.9.10/dist/htmx.js"></script>
+    <link th:fragment="bootstrap" rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css">
+    <script th:fragment="htmx" src="/webjars/htmx.org/1.9.10/dist/htmx.js"></script>
     <script src="/webjars/hyperscript.org/0.9.12/dist/_hyperscript.js"></script>
     <script src="/webjars/hyperscript.org/0.9.12/dist/hdb.js"></script>
 </head>
@@ -25,9 +25,13 @@
         <li>Thymeleaf
             <ul>
                 <li><a href="/thymeleaf/spel">SpEL</a></li>
+                <li><a href="/components">Components</a></li>
             </ul>
         </li>
-        <li><a href="/components">Components</a>
+        <li>Bootstrap
+            <ul>
+                <li><a href="/bootstrap/admin">Admin interface</a></li>
+            </ul>
         </li>
         <li><a href="/htmx">HTMX</a>
             <ul>
