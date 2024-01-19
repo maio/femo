@@ -2,7 +2,7 @@ package cz.maio.femo
 
 import jakarta.servlet.http.HttpServletResponse
 import jakarta.validation.Valid
-import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView
 class HtmxFormController {
 
     class MyForm {
-        @NotNull
+        @NotBlank
         @Size(min = 10, max = 3000)
         var inputText: String = "a b c"
     }
