@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{index :: layout(~{:: title}, ~{:: #content})}">
+<head>
+    <title>HTMX Form</title>
+</head>
+<body class="container">
+<nav th:replace="~{index :: nav}"></nav>
+
+<section id="content">
+    <h1>HTMX Form</h1>
+
+    <!--/*@thymesVar id="result" type="cz.maio.femo.HtmxFormController.FormResult"*/-->
+    <div class="card" th:fragment="result" th:if="${result}">
+        <div class="card-body">
+            <h2 class="card-title">Result</h2>
+            <p class="card-text">
+                <span th:text="${result.wordCount}"></span> words in textarea
+            </p>
+
+            <a th:href="@{/htmx/form}" class="btn btn-primary">Next</a>
+        </div>
+    </div>
+
+    <div class="card" id="myFormWrapper">
+        <div class="card-body">
+            <h2 class="card-title">My Form</h2>
+            <div class="card-text">
+
+                <!-- https://htmx.org/docs/ -->
+                <form th:action="@{/htmx/form}"
+                      th:object="${myForm}"
+                      th:fragment="myForm"
+                      id="myForm"
+                      method="post"
+                      hx-boost="true"
+                      hx-disabled-elt="find button[type=submit]"
+                      hx-target="#myFormWrapper"
+                      hx-swap="outerHTML">
+
+                    <!-- https://getbootstrap.com/docs/5.3/forms/overview/ -->
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="inputText">Input text</label>
+                        <textarea class="form-control"
+                                  th:classappend="${#fields.hasErrors('inputText') ? 'is-invalid' : ''}"
+                                  onchange="this.classList.remove('is-invalid')"
+                                  th:field="*{inputText}"
+                                  id="inputText"
+                                  rows="3"
+                        ></textarea>
+                        <div id="inputTextHelp" class="form-text">10-3000 chars</div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('inputText')}"
+                             th:errors="*{inputText}">Input Text Error
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <span class="spinner-border spinner-border-sm text-secondary htmx-indicator" role="status"
+                          aria-hidden="true"></span>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
