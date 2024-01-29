@@ -29,6 +29,7 @@ dependencies {
     implementation("io.github.wimdeblauwe:htmx-spring-boot:3.2.0")
     implementation("net.datafaker:datafaker:2.1.0")
 
+    implementation("org.webjars:webjars-locator-core:0.55")
     implementation("org.webjars:bootstrap:5.3.2")
     implementation("org.webjars.npm:htmx.org:1.9.10")
     implementation("org.webjars.npm:hyperscript.org:0.9.12")

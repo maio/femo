@@ -5,10 +5,10 @@
 <head th:fragment="common-head(title)">
     <meta charset="UTF-8">
     <title th:replace="${title} ?: _">Femo</title>
-    <link th:fragment="bootstrap" rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css">
-    <script th:fragment="htmx" src="/webjars/htmx.org/1.9.10/dist/htmx.js"></script>
-    <script src="/webjars/hyperscript.org/0.9.12/dist/_hyperscript.js"></script>
-    <script src="/webjars/hyperscript.org/0.9.12/dist/hdb.js"></script>
+    <link th:fragment="bootstrap" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <script th:fragment="htmx" th:src="@{/webjars/htmx.org/dist/htmx.js}"></script>
+    <script th:src="@{/webjars/hyperscript.org/dist/_hyperscript.js}"></script>
+    <script th:src="@{/webjars/hyperscript.org/dist/hdb.js}"></script>
 </head>
 <body class="container">
 
